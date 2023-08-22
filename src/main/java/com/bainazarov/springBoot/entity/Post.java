@@ -1,5 +1,4 @@
 package com.bainazarov.springBoot.entity;
-
 import lombok.Data;
 
 @Data
