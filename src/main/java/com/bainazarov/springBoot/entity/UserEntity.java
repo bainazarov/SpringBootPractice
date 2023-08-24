@@ -1,12 +1,12 @@
 package com.bainazarov.springBoot.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import java.util.List;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-public class User {
+public class UserEntity {
     private Long id;
     private String username;
-    private List<Post> posts;
+    private LocalDate birthday;
 }

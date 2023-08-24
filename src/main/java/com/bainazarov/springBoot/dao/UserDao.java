@@ -1,11 +1,14 @@
-package com.bainazarov.springBoot.service;
+package com.bainazarov.springBoot.dao;
 
 import com.bainazarov.springBoot.entity.UserEntity;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public interface UserService {
+@Component
+public interface UserDao {
+
     void addUserByUsername(String username, LocalDate birthday);
     void addUserById(Long id, LocalDate birthday);
     List<UserEntity> getUsers();
@@ -13,5 +16,5 @@ public interface UserService {
     void updateUserByUsername(String username, UserEntity updateUser);
     void updateUserById(Long id, UserEntity updateUser);
     void deleteUserById(Long id);
-    String deleteAllUsers();
+    void deleteAllUsers();
 }

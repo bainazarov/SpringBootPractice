@@ -1,10 +1,11 @@
 package com.bainazarov.springBoot.controllers;
 
-import com.bainazarov.springBoot.entity.Post;
-import com.bainazarov.springBoot.entity.User;
+import com.bainazarov.springBoot.entity.UserEntity;
 import com.bainazarov.springBoot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,51 +19,51 @@ public class UserController {
         this.userService = userService;
     }
 
-    // add user
+    // add user by username
     @PostMapping("")
-    public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
+    public void addUserByUsername(@RequestBody String username, @RequestBody LocalDate birthday) {
+        userService.addUserByUsername(username, birthday);
     }
 
-    // add Post for user
+    // add user by id
     @PostMapping("/{id}")
-    public Post addPostById(@PathVariable("id") Long id, @RequestBody Post post) {
-        return userService.addPostById(id, post);
+    public void addUserById(@PathVariable Long id, @RequestParam LocalDate birthday) {
+        userService.addUserById(id, birthday);
     }
 
     // get all users
     @GetMapping("")
-    public List<User> getUsers() {
+    public List<UserEntity> getUsers() {
         return userService.getUsers();
     }
 
     // get user by username
     @GetMapping("/{username}")
-    public User getUserByUsername(@PathVariable("username") String username) {
+    public UserEntity getUserByUsername(@PathVariable("username") String username) {
         return userService.getUserByUsername(username);
     }
 
     // update user by username
     @PutMapping("/{username}")
-    public Post updateUserByUsername(@PathVariable("username") String username, @RequestBody Post post) {
-        return userService.updateUserByUsername(username, post);
+    public void updateUserByUsername(@PathVariable("username") String username, @RequestBody UserEntity updateUser) {
+        userService.updateUserByUsername(username, updateUser);
     }
 
     // update user by id
     @PutMapping("/{id}")
-    public User updateUserById(@PathVariable("id") Long id, @RequestBody User updateUser) {
-        return userService.updateUserById(id, updateUser);
+    public void updateUserById(@PathVariable("id") Long id, @RequestBody UserEntity updateUser) {
+        userService.updateUserById(id, updateUser);
     }
 
-    // delete user
-    @DeleteMapping("/{username}")
-    public String deleteUser(@PathVariable("username") String username) {
-        return userService.deleteUser(username);
+    // delete user by id
+    @DeleteMapping("/{id}")
+    public void deleteUserById(@PathVariable("id") Long id) {
+        userService.deleteUserById(id);
     }
 
     // delete all users
     @DeleteMapping("")
-    public String deleteAllUsers() {
-        return userService.deleteAllUsers();
+    public void deleteAllUsers() {
+        userService.deleteAllUsers();
     }
 }
