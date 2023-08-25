@@ -4,7 +4,6 @@ import com.bainazarov.springBoot.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -47,13 +46,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserById(Long id) {
-        userDao.deleteUserById(id);
+    public void deleteUserByUsername(String username) {
+        userDao.deleteUserByUsername(username);
     }
 
     @Override
-    public String deleteAllUsers() {
+    public void deleteAllUsers() {
         userDao.deleteAllUsers();
-        return "All users have been deleted";
     }
 }

@@ -4,8 +4,6 @@ import com.bainazarov.springBoot.entity.UserEntity;
 import com.bainazarov.springBoot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -44,26 +42,28 @@ public class UserController {
     }
 
     // update user by username
-    @PutMapping("/{username}")
+    @PutMapping("/username/{username}")
     public void updateUserByUsername(@PathVariable("username") String username, @RequestBody UserEntity updateUser) {
         userService.updateUserByUsername(username, updateUser);
     }
 
     // update user by id
-    @PutMapping("/{id}")
+    @PutMapping("/id/{id}")
     public void updateUserById(@PathVariable("id") Long id, @RequestBody UserEntity updateUser) {
         userService.updateUserById(id, updateUser);
     }
 
-    // delete user by id
-    @DeleteMapping("/{id}")
-    public void deleteUserById(@PathVariable("id") Long id) {
-        userService.deleteUserById(id);
+    // delete user by username
+    @DeleteMapping("/{username}")
+    public String deleteUserByUsername(@PathVariable("username") String username) {
+        userService.deleteUserByUsername(username);
+        return "User with username " + username + " has been deleted";
     }
 
     // delete all users
     @DeleteMapping("")
-    public void deleteAllUsers() {
+    public String deleteAllUsers() {
         userService.deleteAllUsers();
+        return "All users have been deleted";
     }
 }

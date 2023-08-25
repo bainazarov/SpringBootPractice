@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -21,7 +19,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUserByUsername(UserEntity user) {
-        jdbcTemplate.update("INSERT INTO users (username, birthday) VALUES (?, ?)", user.getUsername(), user.getBirthday());
+        jdbcTemplate.update("INSERT INTO users (username, birthday) VALUES (?, ?, ?)", user.getId(), user.getUsername(), user.getBirthday());
     }
 
     @Override
@@ -31,28 +29,28 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<UserEntity> getUsers() {
-        return jdbcTemplate.query("SELECT id, username, birthday FROM users", new BeanPropertyRowMapper<>(UserEntity.class));
+        return jdbcTemplate.query("SELECT * FROM users", new BeanPropertyRowMapper<>(UserEntity.class));
     }
 
     @Override
     public UserEntity getUserByUsername(String username) {
-        return (UserEntity) jdbcTemplate.query("SELECT id, username, birthday FROM users WHERE username=?", new Object[]{username},
+        return jdbcTemplate.queryForObject("SELECT id, username, birthday FROM users WHERE username=?", new Object[]{username},
                 new BeanPropertyRowMapper<>(UserEntity.class));
     }
 
     @Override
     public void updateUserByUsername(String username, UserEntity updateUser) {
-        jdbcTemplate.update("UPDATE users SET username=?, birthday=?", updateUser.getUsername(), updateUser.getBirthday());
+        jdbcTemplate.update("UPDATE users SET username=?, birthday=? WHERE username=?", updateUser.getUsername(), updateUser.getBirthday(), username);
     }
 
     @Override
     public void updateUserById(Long id, UserEntity updateUser) {
-        jdbcTemplate.update("UPDATE users SET id=?, birthday=?", updateUser.getId(), updateUser.getBirthday());
+        jdbcTemplate.update("UPDATE users SET id=?, birthday=? WHERE id=?", updateUser.getId(), updateUser.getBirthday(), id);
     }
 
     @Override
-    public void deleteUserById(Long id) {
-        jdbcTemplate.update("DELETE FROM users WHERE id=?", id);
+    public void deleteUserByUsername(String username) {
+        jdbcTemplate.update("DELETE FROM users WHERE username=?", username);
     }
 
     @Override

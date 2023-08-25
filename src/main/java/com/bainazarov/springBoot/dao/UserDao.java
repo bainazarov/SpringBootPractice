@@ -2,8 +2,6 @@ package com.bainazarov.springBoot.dao;
 
 import com.bainazarov.springBoot.entity.UserEntity;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -15,6 +13,6 @@ public interface UserDao {
     UserEntity getUserByUsername(String username);
     void updateUserByUsername(String username, UserEntity updateUser);
     void updateUserById(Long id, UserEntity updateUser);
-    void deleteUserById(Long id);
+    void deleteUserByUsername(String username);
     void deleteAllUsers();
 }
