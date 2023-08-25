@@ -17,13 +17,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUserByUsername(String username, LocalDate birthday) {
-        userDao.addUserByUsername(username, birthday);
+    public void addUserByUsername(UserEntity user) {
+        userDao.addUserByUsername(user);
     }
 
     @Override
-    public void addUserById(Long id, LocalDate birthday) {
-        userDao.addUserById(id, birthday);
+    public void addUserById(UserEntity user) {
+        userDao.addUserById(user);
     }
 
     @Override

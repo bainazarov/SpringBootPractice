@@ -9,8 +9,8 @@ import java.util.List;
 @Component
 public interface UserDao {
 
-    void addUserByUsername(String username, LocalDate birthday);
-    void addUserById(Long id, LocalDate birthday);
+    void addUserByUsername(UserEntity user);
+    void addUserById(UserEntity user);
     List<UserEntity> getUsers();
     UserEntity getUserByUsername(String username);
     void updateUserByUsername(String username, UserEntity updateUser);

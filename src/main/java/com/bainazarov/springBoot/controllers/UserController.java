@@ -21,14 +21,14 @@ public class UserController {
 
     // add user by username
     @PostMapping("")
-    public void addUserByUsername(@RequestBody String username, @RequestBody LocalDate birthday) {
-        userService.addUserByUsername(username, birthday);
+    public void addUserByUsername(@RequestBody UserEntity user) {
+        userService.addUserByUsername(user);
     }
 
     // add user by id
     @PostMapping("/{id}")
-    public void addUserById(@PathVariable Long id, @RequestParam LocalDate birthday) {
-        userService.addUserById(id, birthday);
+    public void addUserById(@RequestBody UserEntity user) {
+        userService.addUserById(user);
     }
 
     // get all users

@@ -20,13 +20,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addUserByUsername(String username, LocalDate birthday) {
-        jdbcTemplate.update("INSERT INTO users (username, birthday) VALUES (?, ?)", username, birthday);
+    public void addUserByUsername(UserEntity user) {
+        jdbcTemplate.update("INSERT INTO users (username, birthday) VALUES (?, ?)", user.getUsername(), user.getBirthday());
     }
 
     @Override
-    public void addUserById(Long id, LocalDate birthday) {
-        jdbcTemplate.update("INSERT INTO users (id, birthday) VALUES (?, ?)", id, birthday);
+    public void addUserById(UserEntity user) {
+        jdbcTemplate.update("INSERT INTO users (id, birthday) VALUES (?, ?)", user.getId(), user.getBirthday());
     }
 
     @Override
